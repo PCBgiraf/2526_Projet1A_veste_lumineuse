@@ -20,5 +20,12 @@ git commit -m "Message"
 
 git push
 
+
 ```
+
+
+Cahier des charges : carte PCB 40mm-40mm
+
+
+Guide des Composants : 
 
