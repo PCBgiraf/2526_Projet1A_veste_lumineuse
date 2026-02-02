@@ -4,13 +4,13 @@ Veste lumineuse
 
 
 
-\## Memo GitHub
+## Memo GitHub
 
 ```bash
 
 git pull # récupérer les dernières modifications
 
-\# On travaille
+# On travaille
 
 git status # vérifier les modifications
 
