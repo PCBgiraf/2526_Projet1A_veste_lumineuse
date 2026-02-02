@@ -22,10 +22,10 @@ git push
 
 
 ```
-## truc
+utiliser Visual studio Code pour la partie software sur readme
 
 Cahier des charges : carte PCB 40mm-40mm
 
 
-Guide des Composants : 
+Guide des Composants : interrupteur, kappa de découplage, résistance, diode chenillard, connecteur INPUT/OUTPUT (alim)
 
