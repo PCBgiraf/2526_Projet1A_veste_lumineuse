@@ -15,6 +15,9 @@ ls # pour dire dans quel dossier on se trouve
 
 cat README.md # pour voir ce que Git lit actuellement
 
+explorer .  # savoir quelle README.md le git lit si on crée 2 readme.md (probablement causé par un git clone)
+
+
 git pull # récupérer les dernières modifications
 
 # On travaille
@@ -54,4 +57,4 @@ RESET (Optionnel) : Pour forcer le redémarrage de la puce.
 
 ## datasheet de la STM32 sur les PIN définitions
 
-![PIN definitions](image/Capture d'écran 2026-02-02 184909.PNG)
+![PIN definitions](image/pin_def_stm32.png)
