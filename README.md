@@ -55,11 +55,14 @@ GND : La masse commune.
 
 RESET (Optionnel) : Pour forcer le redémarrage de la puce.
 
-## datasheet de la STM32 sur les PIN définitions
-
-![PIN definitions](image/pin_def_stm32.png)
 
 ## Diode chenillard
 
 On place des diodes chenillard sur KiCad afin de vérifier le bon fonctionnement sur la partie firmware 
 càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce qu'ils sont mal soudés ou alors est-ce à cause du code; les chenillard ici nous donne la solution.
+
+## schéma Kicad et PIN def de la STM32
+
+![PIN definitions](image/stm32_pin_def.png)
+
+![Éditeur schéma Kicad](image/Kicad_schema.png)
