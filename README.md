@@ -66,3 +66,5 @@ càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce
 ![PIN definitions](image/stm32_pin_def.png)
 
 ![Éditeur schéma Kicad](image/Kicad_schema.png)
+
+![cappa de découplage](image/cappa_decouplage.png)
