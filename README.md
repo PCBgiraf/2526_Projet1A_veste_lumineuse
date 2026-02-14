@@ -69,6 +69,8 @@ càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce
 
 ![cappa de découplage](image/cappa_decouplage.png)
 
+## Mise en oeuvre des LED (mise en série + code fonctionnel)
+
 ![repésentation LED en série](image/led_serie.png)
 
 ![Fonctionnement LED avec la STM32](image/led_stm32.png)
