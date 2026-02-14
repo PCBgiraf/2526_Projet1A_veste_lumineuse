@@ -68,3 +68,9 @@ càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce
 ![Éditeur schéma Kicad](image/Kicad_schema.png)
 
 ![cappa de découplage](image/cappa_decouplage.png)
+
+![repésentation LED en série](image/led_serie.png)
+
+![Fonctionnement LED avec la STM32](image/led_stm32.png)
+
+
