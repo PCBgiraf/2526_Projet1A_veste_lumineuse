@@ -75,4 +75,32 @@ càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce
 
 ![Fonctionnement LED avec la STM32](image/led_stm32.png)
 
+## KiCad version final 
+![visuPCB](image/visuPCB.png)
+
+![visu3D](image/visu3D.png)
+
+## Sommaire 
+
+## étude du capteur audio (micro)
+
+------à remplir------
+
+## détail du code sur STM32_CubeIDE
+
+------à remplir------
+
+## étude de la batterie (power bank)
+
+------à remplir------
+
+## Conception de la veste muni de LEDs
+
+------à remplir------
+
+## Difficultés rencontrées au cours du projet 
+
+------à remplir------
+
+
 
