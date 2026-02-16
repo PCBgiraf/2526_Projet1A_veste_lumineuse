@@ -88,8 +88,9 @@ càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce
 
 ## détail du code sur STM32_CubeIDE
 
+```bash
 ------à remplir------
-
+```
 ## étude de la batterie (power bank)
 
 ------à remplir------
