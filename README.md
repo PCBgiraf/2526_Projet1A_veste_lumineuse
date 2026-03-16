@@ -80,6 +80,10 @@ càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce
 
 ![visu3D](image/visu3D.png)
 
+## Vérification du bon fonctionnement du PCB
+On réussit à faire clignoter les LED avec le code suivant : 
+![code allumage des LED_test](image/code_LED_test.png)
+
 ## Sommaire 
 
 ## étude du capteur audio (micro)
