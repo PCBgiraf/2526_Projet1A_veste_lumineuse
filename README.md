@@ -88,10 +88,32 @@ On réussit à faire clignoter les LED avec le code suivant :
 
 ## étude du capteur audio (micro)
 
-------à remplir------
+Au FAB Lab nous avons réalisé les branchements pour pouvoir relier le microphone au connecteur de notre PCB :
+![Branchement du microphone adapté avec le PCB](image/microphone.jpg)
+
+
+## Au cours des séances dernières, le PCB étant inutilisable car il nous fallait finir de souder les connecteurs "MIC IN" et "LED OUT" nous avons réparti entre nous les tâches suivantes : 
+Antoine -> au Fab lab pour souder les connecteurs au PCB
+
+Margaux -> écriture du code des LED chenillardes avec la nucléo donnée par l'établissement car le PCB étant en finition (cependant, cette stm32 diffère avec celui qu'on utilise dans notre PCB, ce qui exige de changer quelques lignes de code) 
+
+Lou-Jane -> écriture du code des LED chenillardes et utilisation de l'oscilloscope pour vérifier le bon fonctionnement de celles-ci.
 
 ## détail du code sur STM32_CubeIDE
 
+Dans un premier temps, nous cherchons à faire clignoter la chaîne de LED pour vérifier le bon fonctionnement de nos composants, voici le code utilisé : 
+```bash
+------à remplir------
+```
+Dans un deuxième temps, nous cherchons à créer un patern avec le chenillard pour l'esthétisme des LED : avec pour objectif des couleurs qui change et des LED qui s'allument et s'éteignent à la chaîne, voici le code utilisé pour réaliser cela :
+```bash
+------à remplir------
+```
+Dans un troisième temps, nous récupérerons les valeurs obtenues par le microphone, d'une part en observant à l'oscilloscope puis en regardant directement sur l'ordinateur :
+```bash
+------à remplir------
+```
+Dans un dernier temps, nous allons relier le fonctionnement du microphone avec celui de la chaîne de LED afin de donner de la cohérence entre l'allumage des LED avec les Pics d'intensité sonore captés par le microphone :
 ```bash
 ------à remplir------
 ```
