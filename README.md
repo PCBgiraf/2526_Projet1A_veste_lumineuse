@@ -35,13 +35,19 @@ Conseil : utiliser Visual studio Code pour la partie software sur readme
 I  ) Introduction
 
 II ) Hardware
+
      a) Sélection des composants
+
      b) Logiciel KiCad
-     c) Soudure du PCB
+ 
+    c) Soudure du PCB
 
 III) Software
+
      a) Récupération de valeurs par le microphone
+
      b) Allumage des LED NeoPixel
+
      c) Dégradé de couleurs (optionnel)
 
 IV ) Démonstration du produit final (lien vidéo)
