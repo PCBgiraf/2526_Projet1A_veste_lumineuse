@@ -98,12 +98,6 @@ schéma Kicad et PIN def de la STM32
 
 ![cappa de découplage](image/cappa_decouplage.png)
 
-## Mise en oeuvre des LED (mise en série + code fonctionnel)
-
-![repésentation LED en série](image/led_serie.png)
-
-![Fonctionnement LED avec la STM32](image/led_stm32.png)
-
 ## KiCad version final 
 ![visuPCB](image/visuPCB.png)
 
@@ -124,14 +118,6 @@ Mise en garde : Bien mettre la gaine (ici en jaune) pour éviter tout court-circ
 
 ![Soudure du microphone adapté avec le PCB](image/microphone.jpg)
 
-à ENLEVER $$$
-Au cours des séances dernières, le PCB étant inutilisable car il nous fallait finir de souder les connecteurs "MIC IN" et "LED OUT" nous avons réparti entre nous les tâches suivantes : 
-Antoine -> au Fab lab pour souder les connecteurs au PCB
-
-Margaux -> écriture du code des LED chenillardes avec la nucléo donnée par l'établissement car le PCB étant en finition (cependant, cette stm32 diffère avec celui qu'on utilise dans notre PCB, ce qui exige de changer quelques lignes de code) 
-
-Lou-Jane -> écriture du code des LED chenillardes et utilisation de l'oscilloscope pour vérifier le bon fonctionnement de celles-ci.
-$$$
 
 ## Software : a) Récupération de valeurs par le microphone
 
@@ -141,32 +127,45 @@ $$$
 
 ## Software : b) Allumage des LED NeoPixel
 
-à vous : Margaux et Lou-Jane 
+Durant les premières séances, nous avons utilisé notre carte STM32 pour réaliser les premiers essais, car le PCB était encore en cours de fabrication. Nous avons d’abord tenté de souder les LED une par une, mais le montage ne fonctionnait pas correctement. Ce dysfonctionnement pouvait venir d’une détérioration des LED pendant la soudure, à cause d’un échauffement trop important, ou bien d’un défaut des LED ou des connexions. Nous avons donc décidé d’utiliser un ruban de LED RGB adressables, plus fiable et plus simple à mettre en œuvre.
 
-à ENLEVER $$$
-Dans un premier temps, nous cherchons à faire clignoter la chaîne de LED pour vérifier le bon fonctionnement de nos composants, voici le code utilisé : 
-```bash
-------à remplir------
-```
+![représentation LED en série](image/led_serie.png)
+ 
+Cependant, les LED adressables ne se commandent pas comme des LED classiques. Elles suivent un principe particulier :
 
-Dans un troisième temps, nous récupérerons les valeurs obtenues par le microphone, d'une part en observant à l'oscilloscope puis en regardant directement sur l'ordinateur :
-```bash
-------à remplir------
-```
-Dans un dernier temps, nous allons relier le fonctionnement du microphone avec celui de la chaîne de LED afin de donner de la cohérence entre l'allumage des LED avec les Pics d'intensité sonore captés par le microphone :
-```bash
-------à remplir------
-```
+![Principe](image/RGB.jpeg)
 
-$$$
+Importance du timer :
+Pour commander les LED RGB adressables, il faut envoyer un signal très précis sur le fil DATA. Les LED reconnaissent les bits grâce à la durée du signal haut. Un bit 0 correspond à une impulsion courte, alors qu’un bit 1 correspond à une impulsion plus longue. On utilise donc un timer de la STM32 pour générer ce signal correctement.  
+Le timer permet d’avoir un signal régulier et précis. Sans lui, les LED peuvent mal lire les données, ce qui peut provoquer de mauvaises couleurs ou empêcher les LED de s’allumer.
+
+Une fois le PCB prêt, nous avons dû adapter notre programme à une autre carte : la STM32G4. Le code précédent n’était pas directement compatible, car les fichiers de configuration, les bibliothèques HAL et certains périphériques internes peuvent changer d’une famille de STM32 à une autre.
+
+Nous avons donc importé les dossiers et fichiers nécessaires correspondant à cette nouvelle STM32G4. Cela comprenait notamment les fichiers liés au microcontrôleur, à la configuration des périphériques, aux timers, aux GPIO et aux bibliothèques HAL.
+
+![Configuration](image/configuration.png)
+
+Une fois que la bande de LED adressables s'allument sur notre nouvelle carte STM32G4, nous avons pu passer à l’assemblage des deux parties principales du programme :
+
+le code de commande des LED ;
+le code d’acquisition du microphone.
+
+L’objectif était de faire fonctionner les deux programmes ensemble. Le microphone permet de mesurer l’intensité sonore ambiante, puis cette valeur est utilisée pour modifier l’affichage des LED. Par exemple, lorsque le son détecté est faible, peu de LED s’allument. Lorsque le son devient plus fort, un plus grand nombre de LED peut s’allumer ou la couleur peut changer.
+
+![amplitude](image/amplitude.png)
+
 
 ## Software : c) Dégradé de couleurs (optionnel)
 
 
 Nous cherchons à créer un pattern avec le chenillard pour l'esthétisme des LED : avec pour objectif des LED qui changent de couleurs avec ces dernières qui déplacent les couleurs le long de la chaîne, voici le code utilisé pour réaliser cela :
-```bash
-------à remplir------
-```
+
+![couleur](image/couleur.png)
+
+
+
+
+
 
 ## Démonstration du produit final (lien vidéo)
 
@@ -184,4 +183,4 @@ www.linkedin_LouJane_Hartmann
 // N'avoir qu'un seul PCB rend difficile la répartition des tâches car on doit attendre que l'un ait fini avec le PCB avant de faire ses mesures ce qui retarde la chaîne de travail : une des solutions aurait été de faire plusieurs PCB (solution réalisable car le PCB et les composants était rapide à souder). // 
 
 
-
+## Conclusion
