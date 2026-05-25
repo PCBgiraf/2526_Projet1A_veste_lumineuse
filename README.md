@@ -106,7 +106,7 @@ schéma Kicad et PIN def de la STM32
 
 ## Hardware : c) Soudure du PCB
 
-/// mettre photo zoomé sur les LED chenillard du PCB pour informer qu'il y a un sens (oui car toutes LED sont des diodes) donné au dos avec un T qui l'indique. ///
+/// mettre photo zoomé sur les LED chenillard du PCB pour informer qu'il y a un sens (oui car toutes LED sont des diodes) donné au dos avec un T qui l'indique. je la pose ce soir :!!!!!///
 
 /// photo des PCB à vide + du Stencil : et dire que la méthode avec la pâte à braser est bcp plus rapide et plus précise qu'à la main ///
 
@@ -156,7 +156,7 @@ le code d’acquisition du microphone.
 L’objectif était de faire fonctionner les deux programmes ensemble. Le microphone permet de mesurer l’intensité sonore ambiante, puis cette valeur est utilisée pour modifier l’affichage des LED. Par exemple, lorsque le son détecté est faible, peu de LED s’allument. Lorsque le son devient plus fort, un plus grand nombre de LED peut s’allumer ou la couleur peut changer.
 
 ![amplitude](image/amplitude.png)
-
+![amplitudeprincipe](image/amplitude.JPG)
 
 ## Software : c) Dégradé de couleurs (optionnel)
 
@@ -173,7 +173,6 @@ Une fois que toutes les couleurs sont définies, la fonction `led_render()` envo
 
 
 
-
 ## Démonstration du produit final (lien vidéo)
 
 Cliquer sur l'un des hyperliens obtenir un aperçu du projet final.
@@ -185,7 +184,7 @@ www.linkedin_LouJane_Hartmann
 
 ## Difficultés rencontrées au cours du projet 
 
-// parler des LED à souder une par une : elle chauffe trop, c'est pas normal -> demander à margaux pk //
+// parler des LED à souder une par une : elle chauffe trop, c'est pas normal 
 // Screen des valeurs du microphone avec les fonctions HAL qui était autour de 700 : ce qui est absurde. Mais désormais avec l'usage de Timer tout est bon //
 // N'avoir qu'un seul PCB rend difficile la répartition des tâches car on doit attendre que l'un ait fini avec le PCB avant de faire ses mesures ce qui retarde la chaîne de travail : une des solutions aurait été de faire plusieurs PCB (solution réalisable car le PCB et les composants était rapide à souder). // 
 
