@@ -141,7 +141,7 @@ Un signal PWM alterne entre un état bas et un état haut. En modifiant le temps
 
 Le timer permet donc d'envoyer un signal PWM stable pour que les LED comprennent correctement les données.
 
-### STM32G4
+## STM32G4
 
 Une fois le PCB prêt, nous avons dû adapter notre programme à une autre carte : la STM32G4. Le code précédent n’était pas directement compatible, car les fichiers de configuration, les bibliothèques HAL et certains périphériques internes peuvent changer d’une famille de STM32 à une autre.
 
