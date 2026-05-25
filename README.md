@@ -100,12 +100,13 @@ schéma Kicad et PIN def de la STM32
 
 ![Éditeur schéma Kicad](image/Kicad_schema.png)
 
+On trouve, sur la documentation de notre microcontrôleur (le STM32G431KBT6), les condensateurs de découplage à placer.
+
 ![cappa de découplage](image/cappa_decouplage.png)
 
-## KiCad version final 
-![visuPCB](image/visuPCB.png)
+Visuel du schéma complet du PCB.
 
-![visu3D](image/visu3D.png)
+![visuPCB](image/visuPCB.png)
 
 
 ## Hardware : c) Soudure du PCB
