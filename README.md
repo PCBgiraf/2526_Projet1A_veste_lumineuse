@@ -103,9 +103,6 @@ schéma Kicad et PIN def de la STM32
 
 ![visu3D](image/visu3D.png)
 
-## Vérification du bon fonctionnement du PCB
-On réussit à faire clignoter les LED avec le code suivant : 
-![code allumage des LED_test](image/code_LED_test.png)
 
 ## Hardware : c) Soudure du PCB
 
@@ -135,9 +132,15 @@ Cependant, les LED adressables ne se commandent pas comme des LED classiques. El
 
 ![Principe](image/RGB.jpeg)
 
-Importance du timer :
-Pour commander les LED RGB adressables, il faut envoyer un signal très précis sur le fil DATA. Les LED reconnaissent les bits grâce à la durée du signal haut. Un bit 0 correspond à une impulsion courte, alors qu’un bit 1 correspond à une impulsion plus longue. On utilise donc un timer de la STM32 pour générer ce signal correctement.  
-Le timer permet d’avoir un signal régulier et précis. Sans lui, les LED peuvent mal lire les données, ce qui peut provoquer de mauvaises couleurs ou empêcher les LED de s’allumer.
+### Rôle du timer et du signal PWM
+Pour commander les LED RGB adressables, la STM32 envoie une suite de bits sur le fil DATA. Les LED différencient un bit 0 d’un bit 1 grâce à la durée de l’impulsion à l’état haut.
+
+Un signal PWM alterne entre un état bas et un état haut. En modifiant le temps passé à l’état haut, on peut créer deux types d’impulsions :
+- une impulsion courte pour envoyer un bit 0 ;
+- une impulsion plus longue pour envoyer un bit 1.
+
+Le timer permet donc d'envoyer un signal PWM stable pour que les LED comprennent correctement les données.
+
 
 Une fois le PCB prêt, nous avons dû adapter notre programme à une autre carte : la STM32G4. Le code précédent n’était pas directement compatible, car les fichiers de configuration, les bibliothèques HAL et certains périphériques internes peuvent changer d’une famille de STM32 à une autre.
 
@@ -162,7 +165,11 @@ Nous cherchons à créer un pattern avec le chenillard pour l'esthétisme des LE
 
 ![couleur](image/couleur.png)
 
+Cette partie du code sert à afficher un dégradé de couleurs sur le ruban de LED. Le programme parcourt toutes les LED une par une. Si la LED fait partie du nombre de LED à allumer, une couleur est calculée avec la fonction `hsl_to_rgb()`. La couleur dépend de la position de la LED dans le ruban, ce qui permet d’obtenir un dégradé.
 
+Si la LED ne doit pas être allumée, elle est mise en noir avec `led_set_RGB(i, 0, 0, 0)`, ce qui revient à l’éteindre.
+
+Une fois que toutes les couleurs sont définies, la fonction `led_render()` envoie les données au ruban. La variable `angle` est ensuite augmentée pour faire évoluer les couleurs au cours du temps, ce qui crée un effet animé. 
 
 
 
