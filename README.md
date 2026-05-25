@@ -57,16 +57,14 @@ V  ) Difficultés rencontrés dans le projet
 ## Introduction 
 
 Dans le cadre d'un projet d'électronique de 1ère année, il nous est demandé de concevoir une veste lumineuse dont les lumières réagissent aux bruits environnants. Par manque de temps, nous avons interprété et restreint la consigne par : créer une bande de LED qui allume de plus en plus de LED simultanément à mesure que le bruit ambiant s'intensifie.
+Le principe de fonctionnement repose sur la détection de l’amplitude sonore avec l’acquisition du signal au microphone. Le signal récupéré est ensuite analysé par le microcontrôleur qui renvoie des valeurs d’amplitude. En fonction de cette amplitude, si une certaine valeur est dépassée, différentes LEDs s’allument progressivement, créant ainsi un effet visuel synchronisé avec la musique ou les sons environnants.
 
 
 ## Hardware : a) Sélection des Composants
 
-liste des composants principaux qui composent le PCB (en excluant résistances et condensateurs)
-
 On travaille sur une carte PCB 40mm-40mm (taille suffisante pour placer tous nos composants) avec 4 couches : 5V,3.3V,3.3VA,GND .
 
-
-Guide des Composants : interrupteur, kappa de découplage, résistance, diode chenillard, connecteur INPUT/OUTPUT (alim), connecteur SWD
+Guide des Composants : régulateur de tension(BU33SD5WG-TR), connnecteur USB-C, condensateur de découplage, résistance, diode chenillard, connecteur INPUT/OUTPUT (alim) , connecteur SWD, microcontrôleur STM32G431KBT6.
 
 On place des diodes chenillard implémenté sur le PCB afin de vérifier le bon fonctionnement sur la partie firmware 
 càd on isole le problème : si les LED finaux ne fonctionnent pas, est-ce parce qu'ils sont mal soudés ou alors est-ce à cause du code; les chenillard ici nous donne la solution.
@@ -88,6 +86,12 @@ RESET (Optionnel) : Pour forcer le redémarrage de la puce.
 
 ----------------------------------------------
 
+Voici un aperçu du PCB et de la BOM pour résumer la liste de nos composants.
+
+![visu3D](image/visu3D.png)
+
+![BOM_kicad](image/BOM_kicad.png)
+
 ## Hardware : b) Logiciel KiCad
 
 schéma Kicad et PIN def de la STM32
@@ -106,9 +110,9 @@ schéma Kicad et PIN def de la STM32
 
 ## Hardware : c) Soudure du PCB
 
-/// mettre photo zoomé sur les LED chenillard du PCB pour informer qu'il y a un sens (oui car toutes LED sont des diodes) donné au dos avec un T qui l'indique. je la pose ce soir :!!!!!///
+Lors de l'assemblage de notre circuit chenillard, une attention particulière doit être portée au sens des LED. Étant des diodes, elles possèdent une polarité stricte et ne laissent passer le courant que dans un seul sens. Pour garantir un montage sans erreur, un repère en forme de « T » est présent au dos de chaque composant pour indiquer clairement l'orientation à respecter sur le PCB.
 
-/// photo des PCB à vide + du Stencil : et dire que la méthode avec la pâte à braser est bcp plus rapide et plus précise qu'à la main ///
+Concernant la fabrication, la réception de nos PCB à vide accompagnés de leur pochoir (stencil) nous a permis d'optimiser considérablement le processus. L'application de pâte à braser via cette méthode s'avère en effet beaucoup plus rapide et offre une précision de soudure nettement supérieure à un assemblage réalisé entièrement à la main.
 
 Au Fab Lab nous avons réalisé la soudure du microphone avec un connecteur tripolaire pour pouvoir le relier au connecteur de notre PCB.
 Mise en garde : Bien mettre la gaine (ici en jaune) pour éviter tout court-circuit et conserver une bonne robustesse de l'ensemble déjà soudé.
@@ -118,9 +122,9 @@ Mise en garde : Bien mettre la gaine (ici en jaune) pour éviter tout court-circ
 
 ## Software : a) Récupération de valeurs par le microphone
 
-/// Photo TIMER6 et parler de l'avantage d'utiliser ça et non les fonctions HAL que propose C ///
-// Bash : Code de la fonction qui donne la valeur max : dire que les valeurs vont de 0 à 4096 avec pour valeur 2000 avec le bruit ambiant, comme il est plus naturel de calculer en prenant comme repère 0 traduisant le silence -> 40 dB bruit ambiant , nous avons alors translater les valeurs pour avoir entre 0 et 2000 au lieu de 2000 et 4096. Ceci ce traduit par un return de la fonction par max - min (c'est-à-dire la fonction relève l'amplitude). //
-// Code d'une liste qu'on prend où on écoute : et avec TimeCallElapse qui est la période des interruptions et qui restitue une valeur prise par le microphone //
+Côté logiciel, la gestion de l'échantillonnage s'appuie sur le TIMER6 plutôt que sur les fonctions d'attente classiques de la bibliothèque HAL, ce qui garantit un chronométrage matériel ultra-précis et surtout non bloquant pour le reste du programme. Ainsi, à chaque interruption définie par la période TimeCallElapse, le microcontrôleur relève instantanément la valeur du microphone pour alimenter notre tableau d'écoute de manière parfaitement cadencée.
+
+Une fois ces données acquises, un traitement est nécessaire car le signal brut oscille entre 0 et 4096, avec un bruit ambiant (environ 40 dB) centré sur la valeur 2000. Pour simplifier l'analyse, il est beaucoup plus naturel de fixer ce silence relatif à 0 ; notre fonction vient donc translater le signal en calculant l'amplitude temporelle via une simple soustraction max - min, nous offrant ainsi des données exploitables comprises entre 0 et 2000.
 
 ## Software : b) Allumage des LED NeoPixel
 
@@ -177,17 +181,27 @@ Une fois que toutes les couleurs sont définies, la fonction `led_render()` envo
 ## Démonstration du produit final (lien vidéo)
 
 Cliquer sur l'un des hyperliens obtenir un aperçu du projet final.
-www.linkedin.com/in/antoine-loysel
-www.youtube_vidéo_veste_lumineuse
-www.linkedin_margaux_maurent
-www.linkedin_LouJane_Hartmann
 
+https://www.youtube.com/watch?v=zNhibc-cM8I
 
 ## Difficultés rencontrées au cours du projet 
 
-// parler des LED à souder une par une : elle chauffe trop, c'est pas normal 
-// Screen des valeurs du microphone avec les fonctions HAL qui était autour de 700 : ce qui est absurde. Mais désormais avec l'usage de Timer tout est bon //
-// N'avoir qu'un seul PCB rend difficile la répartition des tâches car on doit attendre que l'un ait fini avec le PCB avant de faire ses mesures ce qui retarde la chaîne de travail : une des solutions aurait été de faire plusieurs PCB (solution réalisable car le PCB et les composants était rapide à souder). // 
+Au cours du projet, plusieurs difficultés techniques ont été rencontrées.
+
+1. Récupération du signal sonore : Le code renvoyait au début des valeurs incohérentes 
+(screen). Nous avons résolu ce problème en intégrant les timers au code.
+
+2. PCB : Nous n’avions soudé qu’un seul PCB, ce qui rendait la répartition des tâches 
+compliquée car une seule personne pouvait faire des tests à chaque fois. Nous 
+aurions dû souder au moins 3 PCB pour que chacun puisse travailler sa partie en 
+même temps.
+
+3. Soudure des leds : Nous utilisions au début des leds neopixels RGB que nous 
+soudions une à une. Mais la chaleur lors de la soudure cramait les leds, et pendant 
+longtemps nous sommes restés bloqués sur le code car il ne fonctionnait pas sans 
+savoir que c’était les leds qui ne fonctionnaient plus.
 
 
 ## Conclusion
+
+Ce projet de veste lumineuse réactive au son nous a permis de découvrir concrètement le fonctionnement d’un système électronique interactif. Grâce à l’utilisation d’un microphone, d’un microcontrôleur et de LEDs, nous avons réussi à concevoir un prototype capable de traduire l’intensité sonore en effets lumineux. Malgré les difficultés rencontrées, les différentes phases de tests et d’amélioration nous ont permis d’obtenir un système fonctionnel. Enfin, cette expérience ouvre la voie à de nombreuses améliorations possibles, comme l’ajout de nouveaux effets lumineux, l’utilisation de LEDs RGB, une meilleure analyse du signal audio ou encore l’intégration d’une batterie afin de rendre la veste totalement autonome et plus adaptée à une utilisation réelle.
